@@ -10,5 +10,5 @@ Copy the `sproto-mode.el` to some directory on your computer. I put mine under `
 then add the following lines to any of your initialization files:
 ```
 (add-to-list 'load-path "~/.emacs.d/site-lisp/")
-(request 'sproto-mode)
+(require 'sproto-mode)
 ```
