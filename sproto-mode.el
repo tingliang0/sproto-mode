@@ -18,7 +18,7 @@
 (defvar sproto-font-lock-defaults
   `((
     ("-*[0-9]+-*" . font-lock-constant-face)
-    ("[\\.\\*][[:alnum:]]+" . font-lock-type-face)
+    ("[\\.\\*][[[:alnum:]]_]+" . font-lock-type-face)
     ("\\:-*[[:alnum:]]+" . font-lock-constant-face)
     ("-*\\(string\\|integer\\|boolean\\|request\\|response\\)-*" . font-lock-keyword-face))))
 
@@ -26,6 +26,7 @@
 ;; syntax table
 (defvar sproto-mode-syntax-table
   (let ((st (make-syntax-table)))
+    (modify-syntax-entry ?_ "w" st)    
     (modify-syntax-entry ?# "< b" st)
     (modify-syntax-entry ?\n "> b" st)
     st)
