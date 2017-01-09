@@ -1,5 +1,17 @@
-;; hook
-(defvar sproto-mode nil)
+;;; sproto-mode.el --- Major mode for sproto protocol
+;;
+
+;;; Commentary:
+;; A very basic version of major mode for sproto protocol.
+;; Current features:
+;;
+;; - syntax highlight
+;; - basic indent
+;;
+
+;;; Code:
+
+(defvar sproto-mode-hook nil)
 
 
 ;; keymap
@@ -7,11 +19,11 @@
   (let ((map (make-keymap)))
   ;; (define-key "\C-j" 'newline-and-indent)
   map)
-  "Keymap for Sproto major-mode")
+  "Keymap for Sproto `'major-mode.")
 
 
 ;; autoload
-(add-to-list 'auto-mode-alist '("\\.sproto\\" . sproto-mode))
+(add-to-list 'auto-mode-alist '("\\.sproto$" . sproto-mode))
 
 
 ;; font
@@ -26,16 +38,16 @@
 ;; syntax table
 (defvar sproto-mode-syntax-table
   (let ((st (make-syntax-table)))
-    (modify-syntax-entry ?_ "w" st)    
+    (modify-syntax-entry ?_ "w" st)
     (modify-syntax-entry ?# "< b" st)
     (modify-syntax-entry ?\n "> b" st)
     st)
-  "sproto mode syntax table")
+  "Sproto mode syntax table.")
 
 
 ;; indent
 (defun sproto-indent-line ()
-  "Indent current line as sproto code"
+  "Indent current line as sproto code."
   (interactive)
   (beginning-of-line)
   (if (bobp)
@@ -45,10 +57,10 @@
           (progn
             (save-excursion
               (forward-line -1)
-              (setq cur-indent (- (current-indentation) default-tab-width)))
+              (setq cur-indent (- (current-indentation) tab-width)))
             (if (< cur-indent 0)
                 (setq cur-indent 0)))
-        (save-excursion                 
+        (save-excursion
           (while not-indented
             (forward-line -1)
             (if (looking-at ".*}$") ; preline is start block
@@ -57,7 +69,7 @@
                   (setq not-indented nil))
               (if (looking-at ".*{$") ; preline is start of block
                   (progn
-                    (setq cur-indent (+ (current-indentation) default-tab-width))
+                    (setq cur-indent (+ (current-indentation) tab-width))
                     (setq not-indented nil))
                 (if (bobp)
                     (setq not-indented nil)))))))
@@ -74,7 +86,7 @@
 
 ;; entry
 (defun sproto-mode ()
-  "Major mode editing sproto files"
+  "Major mode editing sproto files."
   (interactive)
   (kill-all-local-variables)
   (use-local-map sproto-mode-map)
@@ -87,3 +99,5 @@
   (run-hooks 'sproto-mode-hook))
 
 (provide 'sproto-mode)
+
+;;; sproto-mode.el ends here
