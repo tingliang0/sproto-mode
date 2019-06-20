@@ -30,8 +30,8 @@
 (defvar sproto-font-lock-defaults
   `((
     ("-*[0-9]+-*" . font-lock-constant-face)
-    ("[\\.\\*][[[:alnum:]]_]+" . font-lock-type-face)
-    ("\\:-*[[:alnum:]]+" . font-lock-constant-face)
+    ("\\.[A-Za-z]+" . font-lock-type-face)
+    ;; ("\\:-*[[:alnum:]]+" . font-lock-constant-face)
     ("\\(?: re\\(?:\\(?:quest\\|sponse\\) \\)\\|boolean\\|integer\\|string\\)" . font-lock-keyword-face))))
 
 
